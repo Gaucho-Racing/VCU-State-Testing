@@ -2,31 +2,41 @@
 #define STATE_MACHINE_HPP
 
 
-//event data class
+//EventData base class for data attached during events
+//event data on heap needs to be deleted
 class EventData{
     public:
         virtual ~EventData();
 };
 
+//struct for the states to be used in the state maps
 struct StateStruct;
 
 
-//class for FSM
+//class for finite state machine
 class StateMachine {
     public:
-        StateMachine(unsigned char maxStates);
+        StateMachine(unsigned char max_states);
         
         virtual ~StateMachine(){}
     
     protected:
+
         unsigned char current_state;
 
-        enum default_states {EVENT_IGNORED = 0xFE, CANNOT_OCCUR};
+        //default "states" for all derived classes for error handling in transition map
+        enum default_states {EVENT_IGNORED, CANNOT_OCCUR};
 
+
+        //creates an external event for the state machine
         void ExternalEvent(unsigned char, EventData* = nullptr);
+        //creates an internal event for the state machine
         void InternalEvent(unsigned char, EventData* = nullptr);
 
-        virtual const StateStruct* GetStateMap() = 0;
+
+        //this is to be implemented in the derived class, such as motor.hpp
+        //returns the StateMap of the system for the order of the states (ordered pairs with transition)
+        virtual const StateStruct* GetStateMap();
 
     private:
 
@@ -37,12 +47,14 @@ class StateMachine {
 };
 
 
+
 //no clue how this works but works instead of the StateFunc struct
 typedef void (StateMachine::*StateFunc)(EventData *);
 
 struct StateStruct {
     StateFunc currStateFunc;    
 };
+
 
 
 

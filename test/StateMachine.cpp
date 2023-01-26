@@ -2,14 +2,11 @@
 #include <assert.h>
 
 
-//preinitializing in the constructor
-StateMachine::StateMachine(unsigned char max_states):
-    num_max_states(max_states),
-    current_state(0),
-    event_generated(false),
-    curr_event_data(nullptr)
-{
-
+//initializer list in the constructor for the const variable max_states
+StateMachine::StateMachine(unsigned char max_states): num_max_states(max_states) {
+    current_state = 0;
+    event_generated = false;
+    curr_event_data = nullptr;
 }
 
 void StateMachine::ExternalEvent(unsigned char new_state, EventData* data){
