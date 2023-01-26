@@ -22,22 +22,15 @@ class Motor : public StateMachine {
 
         //a state map to define the state functions order
         //state map logic:
-        // BEGIN_STATE_MAP
-        //     STATE_MAP_ENTRY(&Motor::ST_Idle)
-        //     STATE_MAP_ENTRY(&Motor::ST_Stop)
-        //     STATE_MAP_ENTRY(&Motor::ST_Start)
-        //     STATE_MAP_ENTRY(&Motor::ST_ChangeSpeed)
-        // END_STATE_MAP // return start of it
-
         const StateStruct* GetStateMap() { 
-            static const StateStruct StateMap[] = {
+            static const StateStruct STATE_MAP[] = {
                 reinterpret_cast<StateFunc>(&Motor::ST_F_Idle),
                 reinterpret_cast<StateFunc>(&Motor::ST_F_Stop),
                 reinterpret_cast<StateFunc>(&Motor::ST_F_Start),
                 reinterpret_cast<StateFunc>(&Motor::ST_F_ChangeSpeed)
             };
 
-            return &StateMap[0];
+            return &STATE_MAP[0];
         }
         
 
