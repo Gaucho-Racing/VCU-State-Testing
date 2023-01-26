@@ -12,7 +12,7 @@ struct MotorData : public EventData {
 class Motor : public StateMachine {
     public:
         //inline constructor
-        Motor() : StateMachine(ST_MAX_STATES){}
+        Motor() : StateMachine(STATE_MAX_STATES){}
 
         //external events
         //stop, set speed
@@ -22,18 +22,29 @@ class Motor : public StateMachine {
         // function entries in the state map
         //maybe use these in the state map instead of typedef to avoid the weird ARM64 error
         enum Motor_States { 
-            ST_IDLE = 0,
-            ST_STOP,
-            ST_START,
-            ST_CHANGE_SPEED,
-            ST_MAX_STATES
+            STATE_IDLE = 0,
+            STATE_STOP,
+            STATE_START,
+            STATE_CHANGE_SPEED,
+            STATE_MAX_STATES
         };
 
         //state functions
+        void STATE_Idle(EventData*);
+        void STATE_Stop(EventData*);
+        void STATE_Start(EventData*);
+        void STATE_ChangeSpeed(EventData*);
+
 
 
         //a state map to define the state functions order
-
+        //state map logic:
+        // BEGIN_STATE_MAP
+        //     STATE_MAP_ENTRY(&Motor::ST_Idle)
+        //     STATE_MAP_ENTRY(&Motor::ST_Stop)
+        //     STATE_MAP_ENTRY(&Motor::ST_Start)
+        //     STATE_MAP_ENTRY(&Motor::ST_ChangeSpeed)
+        // END_STATE_MAP
 
 
 
