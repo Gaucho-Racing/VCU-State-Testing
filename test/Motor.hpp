@@ -12,28 +12,11 @@ struct MotorData : public EventData {
 class Motor : public StateMachine {
     public:
         //inline constructor
-        Motor() : StateMachine(STATE_MAX_STATES){}
+        Motor() : StateMachine(MOTOR_MAX_STATES){}
 
         //external events
-        //stop, set speed
-    private:   
-
-        // state enumeration order must match the order of state
-        // function entries in the state map
-        //maybe use these in the state map instead of typedef to avoid the weird ARM64 error
-        enum Motor_States { 
-            STATE_IDLE = 0,
-            STATE_STOP,
-            STATE_START,
-            STATE_CHANGE_SPEED,
-            STATE_MAX_STATES
-        };
-
-        //state functions
-        void STATE_Idle(EventData*);
-        void STATE_Stop(EventData*);
-        void STATE_Start(EventData*);
-        void STATE_ChangeSpeed(EventData*);
+        //void stop, 
+        //void set speed
 
 
 
@@ -45,6 +28,37 @@ class Motor : public StateMachine {
         //     STATE_MAP_ENTRY(&Motor::ST_Start)
         //     STATE_MAP_ENTRY(&Motor::ST_ChangeSpeed)
         // END_STATE_MAP
+
+        const StateStruct* GetStateMap() { 
+            static const StateStruct StateMap[] = {
+                //&Motor::ST_F_Idle
+                //&Motor::ST_F_Stop
+                //&Motor::ST_F_Start
+                //&Motor::ST_F_ChangeSpeed
+            };
+
+            return &StateMap[0];
+        }
+        
+
+    private:   
+
+        // state enumeration order MUST match the order of state
+        // function entries in the state map
+        //maybe use these in the state map instead of typedef to avoid the weird ARM64 error
+        enum Motor_States { 
+            STATE_IDLE = 0,
+            STATE_STOP,
+            STATE_START,
+            STATE_CHANGE_SPEED,
+            MOTOR_MAX_STATES
+        };
+
+        //state functions
+        void ST_F_Idle(EventData*);
+        void ST_F_Stop(EventData*);
+        void ST_F_Start(EventData*);
+        void ST_F_ChangeSpeed(EventData*);
 
 
 
