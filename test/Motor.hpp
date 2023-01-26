@@ -20,6 +20,7 @@ class Motor : public StateMachine {
 
         // state enumeration order must match the order of state
         // function entries in the state map
+        //maybe use these in the state map instead to avoid the weird ARM64 error
         enum Motor_States { 
             ST_IDLE = 0,
             ST_STOP,
