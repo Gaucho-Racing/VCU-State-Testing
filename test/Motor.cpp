@@ -9,7 +9,7 @@ void Motor::StopM() {
     //for example, the EVENT_IGNORED state corresponds with the STATE_IDLE
     //because the motor is already not in motion
 
-    static const int8_t TRANSITION_MAP[] = {
+    static const int TRANSITION_MAP[] = {
                                 //corresponding position in STATE_MAP (and enum MotorStates)
         EVENT_IGNORED,          //STATE_IDLE
         CANNOT_OCCUR,           //STATE_STOP
@@ -28,7 +28,7 @@ void Motor::SetSpeed(MotorData* mData){
     //same thing as the stop function above, corrensponding pairs 
     //in the transition map with the state map
 
-    static const int8_t TRANSITION_MAP[] = {
+    static const int TRANSITION_MAP[] = {
                                 //corresponding position in STATE_MAP (and enum MotorStates)
         EVENT_IGNORED,          //STATE_IDLE
         CANNOT_OCCUR,           //STATE_STOP
