@@ -10,37 +10,37 @@ class EventData{
 };
 
 //struct for the states to be used in the state maps
-struct StateStruct;
+//struct StateStruct;
 
 
 //class for finite state machine
 class StateMachine {
     public:
-        StateMachine(unsigned char max_states);
+        StateMachine(int max_states);
         
         virtual ~StateMachine(){}
     
     protected:
 
-        unsigned char current_state;
+        int current_state;
 
         //default "states" for all derived classes for error handling in transition map
-        enum default_states {EVENT_IGNORED, CANNOT_OCCUR};
+        enum default_states {EVENT_IGNORED = 0xFE, CANNOT_OCCUR};
 
 
         //creates an external event for the state machine
-        void ExternalEvent(unsigned char, EventData* = nullptr);
+        void ExternalEvent(int, EventData*);
         //creates an internal event for the state machine
-        void InternalEvent(unsigned char, EventData* = nullptr);
+        void InternalEvent(int, EventData*);
 
 
         //this is to be implemented in the derived class, such as motor.hpp
         //returns the StateMap of the system for the order of the states (ordered pairs with transition)
-        virtual const StateStruct* GetStateMap();
+        virtual const StateFunc* GetStateMap();
 
     private:
 
-        const unsigned char num_max_states;
+        const int num_max_states;
         bool event_generated;
         EventData* curr_event_data;
         void StateEngine();
@@ -48,13 +48,14 @@ class StateMachine {
 
 
 
-//no clue how this works but works instead of the StateFunc struct
-typedef void (StateMachine::*StateFunc)(EventData *);
+//typedef for a pointer to a function
 
-struct StateStruct {
-    //pointer to a function
-    StateFunc currStateFunc;    
-};
+typedef void (*StateFunc)(EventData*);
+
+// struct StateStruct {
+//     //pointer to a function
+//     StateFunc currStateFunc;    
+// };
 
 
 

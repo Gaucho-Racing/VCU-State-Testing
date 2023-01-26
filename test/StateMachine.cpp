@@ -3,13 +3,13 @@
 
 
 //initializer list in the constructor for the const variable max_states
-StateMachine::StateMachine(unsigned char max_states): num_max_states(max_states) {
+StateMachine::StateMachine(int max_states): num_max_states(max_states) {
     current_state = 0;
     event_generated = false;
     curr_event_data = nullptr;
 }
 
-void StateMachine::ExternalEvent(unsigned char new_state, EventData* data){
+void StateMachine::ExternalEvent(int new_state, EventData* data){
     if(new_state == EVENT_IGNORED) {
         if(data) delete data;
     }
@@ -22,7 +22,7 @@ void StateMachine::ExternalEvent(unsigned char new_state, EventData* data){
     }
 }
 
-void StateMachine::InternalEvent(unsigned char new_state, EventData* data)
+void StateMachine::InternalEvent(int new_state, EventData* data)
 {
 	if (data == nullptr)
 		data = new EventData();
@@ -45,11 +45,11 @@ void StateMachine::StateEngine(){
 
         assert(current_state < num_max_states);
 
-        const StateStruct* state_map = GetStateMap();
+        const StateFunc* state_map = GetStateMap();
 
         //execute the state passing in the event data if any
         //executing the current state function through the state map
-        (this->*state_map[current_state].currStateFunc)(temp_event_data);
+        (*state_map[current_state])(temp_event_data);
 
         if(temp_event_data){
             delete temp_event_data;

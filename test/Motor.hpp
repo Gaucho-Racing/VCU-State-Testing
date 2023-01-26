@@ -18,21 +18,19 @@ class Motor : public StateMachine {
         void StopM();
         void SetSpeed(MotorData*);
 
-
-
         //a state map to define the state functions order
         //state map logic:
-        const StateStruct* GetStateMap() { 
-            static const StateStruct STATE_MAP[] = {
-                reinterpret_cast<StateFunc>(&Motor::ST_F_Idle),
-                reinterpret_cast<StateFunc>(&Motor::ST_F_Stop),
-                reinterpret_cast<StateFunc>(&Motor::ST_F_Start),
-                reinterpret_cast<StateFunc>(&Motor::ST_F_ChangeSpeed)
+    
+        const StateFunc* GetStateMap() { 
+            static const StateFunc STATE_MAP[] = {
+                &ST_F_Idle,
+                &ST_F_Stop,
+                &ST_F_Start,
+                &ST_F_ChangeSpeed
             };
 
             return &STATE_MAP[0];
         }
-        
 
     private:   
 
@@ -53,7 +51,7 @@ class Motor : public StateMachine {
         void ST_F_Start(MotorData*);
         void ST_F_ChangeSpeed(MotorData*);
 
-
+        
 
 };
 
