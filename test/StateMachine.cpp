@@ -48,7 +48,7 @@ void StateMachine::StateEngine(){
         const StateStruct* state_map = GetStateMap();
 
         //execute the state passing in the event data if any
-        //also dont know how this works, will prob change later
+        //executing the current state function through the state map
         (this->*state_map[current_state].currStateFunc)(temp_event_data);
 
         if(temp_event_data){

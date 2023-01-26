@@ -52,6 +52,7 @@ class StateMachine {
 typedef void (StateMachine::*StateFunc)(EventData *);
 
 struct StateStruct {
+    //pointer to a function
     StateFunc currStateFunc;    
 };
 

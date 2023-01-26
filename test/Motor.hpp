@@ -15,8 +15,8 @@ class Motor : public StateMachine {
         Motor() : StateMachine(MOTOR_MAX_STATES){}
 
         //external events
-        //void stop, 
-        //void set speed
+        void StopM();
+        void SetSpeed(MotorData*);
 
 
 
@@ -27,14 +27,14 @@ class Motor : public StateMachine {
         //     STATE_MAP_ENTRY(&Motor::ST_Stop)
         //     STATE_MAP_ENTRY(&Motor::ST_Start)
         //     STATE_MAP_ENTRY(&Motor::ST_ChangeSpeed)
-        // END_STATE_MAP
+        // END_STATE_MAP // return start of it
 
         const StateStruct* GetStateMap() { 
             static const StateStruct StateMap[] = {
-                //&Motor::ST_F_Idle
-                //&Motor::ST_F_Stop
-                //&Motor::ST_F_Start
-                //&Motor::ST_F_ChangeSpeed
+                reinterpret_cast<StateFunc>(&Motor::ST_F_Idle),
+                reinterpret_cast<StateFunc>(&Motor::ST_F_Stop),
+                reinterpret_cast<StateFunc>(&Motor::ST_F_Start),
+                reinterpret_cast<StateFunc>(&Motor::ST_F_ChangeSpeed)
             };
 
             return &StateMap[0];
@@ -57,8 +57,8 @@ class Motor : public StateMachine {
         //state functions
         void ST_F_Idle(EventData*);
         void ST_F_Stop(EventData*);
-        void ST_F_Start(EventData*);
-        void ST_F_ChangeSpeed(EventData*);
+        void ST_F_Start(MotorData*);
+        void ST_F_ChangeSpeed(MotorData*);
 
 
 
