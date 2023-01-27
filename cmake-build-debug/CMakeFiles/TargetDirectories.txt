@@ -1,0 +1,3 @@
+/Users/nikkparasar/Documents/FSAE EV/VCU-State-Testing/cmake-build-debug/CMakeFiles/VCU_State_Testing.dir
+/Users/nikkparasar/Documents/FSAE EV/VCU-State-Testing/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/nikkparasar/Documents/FSAE EV/VCU-State-Testing/cmake-build-debug/CMakeFiles/rebuild_cache.dir

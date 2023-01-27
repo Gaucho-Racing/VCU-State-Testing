@@ -6,6 +6,10 @@
 struct MotorData : public EventData {
     //speed of the motor
     int rpm;
+    double brakepos;
+    double apps_pos;
+    
+
 };
 
 //main motor state machine class

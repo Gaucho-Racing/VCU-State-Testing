@@ -5,8 +5,8 @@
 //EventData base class for data attached during events
 //event data on heap needs to be deleted
 class EventData{
-    public:
-        virtual ~EventData();
+    //public:
+        //virtual ~EventData();
 };
 
 //struct for the states to be used in the state maps

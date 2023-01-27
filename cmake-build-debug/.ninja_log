@@ -1,0 +1,4 @@
+# ninja log v5
+0	222	1674783684353131442	CMakeFiles/VCU_State_Testing.dir/test_restored/StateMachine.cpp.o	fcd4877e9190e2db
+0	282	1674783684412131288	CMakeFiles/VCU_State_Testing.dir/test_restored/testrun.cpp.o	db73a2c24af15e9f
+0	294	1674783684424403546	CMakeFiles/VCU_State_Testing.dir/test_restored/Motor.cpp.o	c27b7b761dc73ffe

@@ -1,6 +1,7 @@
+#include "Motor.hpp"
 #include <iostream>
 using namespace std;
-#include "Motor.hpp"
+
 
 void Motor::StopM() {
     //to stop the motor, you need to transition states
@@ -30,10 +31,10 @@ void Motor::SetSpeed(MotorData* mData){
 
     static const int TRANSITION_MAP[] = {
                                 //corresponding position in STATE_MAP (and enum MotorStates)
-        EVENT_IGNORED,          //STATE_IDLE
-        CANNOT_OCCUR,           //STATE_STOP
-        STATE_STOP,             //STATE_START
-        STATE_STOP,             //STATE_CHANGE_SPEED
+        STATE_START,            //STATE_IDLE
+        STATE_START,            //STATE_STOP
+        STATE_CHANGE_SPEED,     //STATE_START
+        STATE_CHANGE_SPEED,     //STATE_CHANGE_SPEED
         0                       
     }; 
      //execute the external event of the new state, passing in the motor data
