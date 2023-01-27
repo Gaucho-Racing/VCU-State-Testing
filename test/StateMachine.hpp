@@ -36,7 +36,12 @@ class StateMachine {
 
         //this is to be implemented in the derived class, such as motor.hpp
         //returns the StateMap of the system for the order of the states (ordered pairs with transition)
-        virtual const StateFunc* GetStateMap();
+        //virtual const StateFunc* GetStateMap();
+
+        //without the broken typedef
+        virtual const int* GetStateMap();
+
+        virtual void execState(int index, EventData* eData );
 
     private:
 

@@ -1,5 +1,6 @@
 #include "StateMachine.hpp"
 #include <assert.h>
+#include <string>
 
 
 //initializer list in the constructor for the const variable max_states
@@ -45,11 +46,18 @@ void StateMachine::StateEngine(){
 
         assert(current_state < num_max_states);
 
-        const StateFunc* state_map = GetStateMap();
+        const int* state_map = GetStateMap();
 
         //execute the state passing in the event data if any
         //executing the current state function through the state map
-        (*state_map[current_state])(temp_event_data);
+        //(*state_map[current_state])(temp_event_data);
+
+        //doing the same thing but without the annoying typedef
+        //by using the virtual helper function execState
+
+        execState(state_map[current_state], curr_event_data);
+                    
+
 
         if(temp_event_data){
             delete temp_event_data;
